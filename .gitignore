@@ -1,0 +1,18 @@
+# npm debugging logs
+npm-debug.log*
+
+# project dependencies
+node_modules
+
+# OSX folder attributes
+.DS_Store
+
+#build
+build
+
+#vscode
+.vscode
+
+# temporary files
+*.tmp
+*~
