@@ -88,6 +88,7 @@ this.usserassigne=this.usserassigne.bind(this);
                             this.setState({pro_list});
                           
                             console.log(pro_list);
+                            console.log(this.state.text);
              
                             }
                            else{
@@ -139,14 +140,23 @@ this.usserassigne=this.usserassigne.bind(this);
             const {pro_list } =this.state;
           if(pro_list.length === 0){
             return null;
-          }     
+          } 
+              if(this.state.text == ''){
+                return(
+                <ul className="prolist" name="text" >
+                    <li data-id= " " onClick={this.hiddeninputbox.bind(this)}>select All</li>
+                </ul>
+           )
+              }
+              else {
           return (
-         
+       
             <ul className="prolist" name="text" >
                  {pro_list.map((item)=><li  data-id={item.proj_id}  key={item.proj_id}  value={`${item.proj_name}`}  onClick={this.hiddeninputbox.bind(this)}>{item.proj_name}</li>)}
             </ul>
 
           )
+              }
         
         }
 //Login user details
