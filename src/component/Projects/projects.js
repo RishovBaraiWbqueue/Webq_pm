@@ -368,7 +368,7 @@ export default class Projects extends Component {
         <tr key={i}>
         <td  className="taskno"><span>{i+1}</span></td>
         <td className="p-number"><input type="text" size="3" className="form-control"  defaultValue={`${detail.project_priority}`}/></td>
-        <td className="p-name"><div className="p-title" data-id={detail.project_id} onClick={this.getData.bind(this)}>{detail.project_name}</div><div><a href="#" data-toggle="tooltip" title="Update"><i className="fa fa-refresh" aria-hidden="true"></i></a><a href="#" data-toggle="tooltip" title="Content"><i className="fa fa-file-text" aria-hidden="true"></i></a><a href="#" className="p-task" data-toggle="tooltip" title="Task">10</a><label className="p-checkbx"  data-toggle="tooltip" title="Mark as ready"><input type="checkbox"/></label></div></td>
+        <td className="p-name"><div className="p-title" data-id={detail.project_id} onClick={this.getData.bind(this)}  style={{cursor:'pointer'}}>{detail.project_name}</div><div><a href="#" data-toggle="tooltip" title="Update"><i className="fa fa-refresh" aria-hidden="true"></i></a><a href="#" data-toggle="tooltip" title="Content"><i className="fa fa-file-text" aria-hidden="true"></i></a><a href="#" className="p-task" data-toggle="tooltip" title="Task">10</a><label className="p-checkbx"  data-toggle="tooltip" title="Mark as ready"><input type="checkbox"/></label></div></td>
         <td className="status text-g">{detail.project_status}</td>
         <td><span>{detail.status_modified}</span></td>
         <td className="name"><span data-toggle="tooltip" title={detail.role}>{detail.assigned_to}</span></td>

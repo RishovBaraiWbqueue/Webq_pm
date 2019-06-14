@@ -143,21 +143,23 @@ this.usserassigne=this.usserassigne.bind(this);
           renderSuggesstions (){
             const {pro_list } =this.state;
           if(pro_list.length === 0){
-            return null;
-          } 
+            
               if(this.state.text == ''){
-               
-                return(
-                <ul className="prolist" name="text" >
-                    <li value= " " data-id=" " onClick={this.hiddeninputbox.bind(this)}>select All</li>
-                </ul>
-           )
-              }
+                
+                  return(
+                  <ul className="prolist" name="text" >
+                      <li value= " " data-id=" " onClick={this.hiddeninputbox.bind(this)}  style={{cursor:'pointer'}}>select All</li>
+                  </ul>
+              )
+                  }
+              else {return null;}
+          } 
+              
               else {
           return (
        
             <ul className="prolist" name="text" >
-                 {pro_list.map((item)=><li  data-id={item.proj_id}  key={item.proj_id}  value={`${item.proj_name}`}  onClick={this.hiddeninputbox.bind(this)}>{item.proj_name}</li>)}
+                 {pro_list.map((item)=><li  data-id={item.proj_id}  key={item.proj_id}  value={`${item.proj_name}`}  onClick={this.hiddeninputbox.bind(this)}  style={{cursor:'pointer'}}>{item.proj_name}</li>)}
             </ul>
 
           )
