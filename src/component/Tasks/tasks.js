@@ -66,8 +66,12 @@ this.usserassigne=this.usserassigne.bind(this);
             { 
               const value = e.target.value;
               let pro_name = [];
+              let {proj_nm} = this.state;
+                              proj_nm = "";
+                              this.setState({proj_nm});
              
-              if(value.length > 0){
+              // if(value.length > 0){
+                console.log(this.state.proj_nm);
                 setTimeout(  
                   function() { 
                           let formData = new FormData();
@@ -89,7 +93,7 @@ this.usserassigne=this.usserassigne.bind(this);
                           
                             console.log(pro_list);
                             console.log(this.state.text);
-             
+                           
                             }
                            else{
                            console.log("error");
@@ -102,7 +106,7 @@ this.usserassigne=this.usserassigne.bind(this);
                 
                    
                    
-              } 
+              // } 
                  this.setState(()=>({pro_name, text:value}));
         }
          // select the suggesstion 
@@ -142,9 +146,10 @@ this.usserassigne=this.usserassigne.bind(this);
             return null;
           } 
               if(this.state.text == ''){
+               
                 return(
                 <ul className="prolist" name="text" >
-                    <li data-id= " " onClick={this.hiddeninputbox.bind(this)}>select All</li>
+                    <li value= " " data-id=" " onClick={this.hiddeninputbox.bind(this)}>select All</li>
                 </ul>
            )
               }
@@ -177,72 +182,72 @@ var user_role_pm=userDetils.r;
   }
 
   fetchData() {
-let {offset,limit} = this.state;
-offset = offset + limit;
-this.setState({offset});
-//console.log(offset);
+      let {offset,limit} = this.state;
+      offset = offset + limit;
+      this.setState({offset});
+      //console.log(offset);
 
-let users = JSON.parse(localStorage.getItem("user"));
-let idd_u = users.user_id;
+        let users = JSON.parse(localStorage.getItem("user"));
+        let idd_u = users.user_id;
 
-let formDt = new FormData();
-formDt.append('user_id',idd_u);
-      formDt.append('todo',this.state.slt1);
-      formDt.append('project',this.state.proj_nm);
-      formDt.append('tasklist',this.state.flt_tasklist);
-      formDt.append('uassign',this.state.flt_assign);
-      formDt.append('off_set',this.state.offset);
-      formDt.append('lmt_set',this.state.limit);
-      formDt.append('task_srch',this.state.srch);
-      formDt.append('role',this.state.role);
-      
+        let formDt = new FormData();
+          formDt.append('user_id',idd_u);
+                formDt.append('todo',this.state.slt1);
+                formDt.append('project',this.state.proj_nm);
+                formDt.append('tasklist',this.state.flt_tasklist);
+                formDt.append('uassign',this.state.flt_assign);
+                formDt.append('off_set',this.state.offset);
+                formDt.append('lmt_set',this.state.limit);
+                formDt.append('task_srch',this.state.srch);
+                formDt.append('role',this.state.role);
+                
 
-axios({
-method: 'post',
-url: 'http://pm.webq.co/api/filter_pm_api.php',
-data: formDt,
-config: { headers: {'Content-Type': 'multipart/form-data' }}
-})
-.then(res => {
-if(res.data){
-let {details} = this.state;
-details = details.concat(res.data.record);
-this.setState({details})
-//console.log(details);
-}
-else{
-//console.log("error");
-}
-})
+          axios({
+          method: 'post',
+          url: 'http://pm.webq.co/api/filter_pm_api.php',
+          data: formDt,
+          config: { headers: {'Content-Type': 'multipart/form-data' }}
+          })
+            .then(res => {
+                if(res.data){
+                    let {details} = this.state;
+                    details = details.concat(res.data.record);
+                    this.setState({details})
+                    //console.log(details);
+                }
+                else{
+                //console.log("error");
+                }
+          })
 }
 
 
 //fetch for usser assigned
 
- usserassigne(eve){
-  setTimeout(  
-  function() { 
-          let formData = new FormData();
-     formData.append('keyup',this.state.nam);
-    axios({
-      method:'post',
-      url:'http://pm.webq.co/api/fetch_select_assignname_api.php',
-      data:formData,
-      config: { headers: {'Content-Type': 'multipart/form-data' }}
-   })
-   .then(res => {
-    //console.log(res);
-        if(res.data){
-            let {uassign} = this.state;
-            uassign = res.data.record;
-             this.setState({uassign})
-            //console.log(details);
-             }
-            else{
-            console.log("error");
-            }
-    }) 
-    } .bind(this), 300 );
+ usserassigne(){
+      setTimeout(  
+      function() { 
+              let formData = new FormData();
+                formData.append('keyup',this.state.nam);
+                  axios({
+                    method:'post',
+                    url:'http://pm.webq.co/api/fetch_select_assignname_api.php',
+                    data:formData,
+                    config: { headers: {'Content-Type': 'multipart/form-data' }}
+        })
+      .then(res => {
+        //console.log(res);
+            if(res.data){
+                let {uassign} = this.state;
+                uassign = res.data.record;
+                this.setState({uassign})
+                //console.log(details);
+                }
+                else{
+                  console.log("error");
+                }
+        }) 
+        } .bind(this), 300 );
  }
 
 
@@ -386,7 +391,7 @@ senddata(eve){
   window.location.href="http://pm.webq.co/task-conversation.php?task_id="+id;
 }
    render() {
-    const {text} = this.state; // text for project filter
+
 //separate values for user role in map
   let i=1;
 let details = this.state.details.map((detail,i)=>{
@@ -487,7 +492,7 @@ return (
                           <label>Project</label>
 
                               <input className="form-control" name="nam" value={this.state.text} onChange = {this.onTextChange} type="text"  />
-                               <input type ="hidden" name ="proj_nm" value={this.state.proj_nm}  onChange = {this.ckchange} />
+                               
                                 <ul >
                                       {this.renderSuggesstions()}
                                 </ul>
