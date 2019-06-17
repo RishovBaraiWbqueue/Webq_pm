@@ -35,7 +35,7 @@ componentDidMount(){
       config: { headers: {'Content-Type': 'multipart/form-data' }}
   })
   .then(
-    window.location.href= "http://localhost:3000"
+    window.location.href= "/#"
     )
   localStorage.removeItem("user");
 }

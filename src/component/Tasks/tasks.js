@@ -440,7 +440,7 @@ return (
         </div>
         <div className="menu">
             <ul>
-              <li><Link to="/autoComplete" refresh="true"><i className="fa fa-tachometer" aria-hidden="true"></i>Tasks</Link></li>
+              <li><Link to="/tasks/:id" refresh="true"><i className="fa fa-tachometer" aria-hidden="true"></i>Tasks</Link></li>
                 <li><Link to="/tasklist" refresh="true"><i className="fa fa-tasks" aria-hidden="true"></i>Task List</Link></li>
                 <li><Link to="/projects" refresh="true"><i className="fa fa-book" aria-hidden="true"></i>Projects</Link></li>
                 <li><a href="#"><i className="fa fa-address-card" aria-hidden="true"></i>Worksheet</a></li>
