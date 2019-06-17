@@ -10,7 +10,7 @@ class TASK extends Component{
 this.state={id:'',
             name:'',       role:'',
             picture:'',    details:[],
-            offset:0,  limit:10,
+            offset:0,     limit:10,
             pro_list:[],   slt1:'',
             proname:'',     uassign:[],
             tlist:[],       flt_tasklist:'',
@@ -76,7 +76,7 @@ this.usserassigne=this.usserassigne.bind(this);
           }
           else if(this.state.isChecked == false){
             return  <select name="slt1" className="form-control" value={this.state.slt1} onChange={this.ckchange}>
-                      <option value="">-- All TO DO(s) --</option>
+                      <option value="">-- All Task(s) --</option>
                       <option value="Done">Done</option>
                       <option value="Opened">Opened</option>
                       <option value="Technical Issue">Technical Issue</option>
@@ -236,8 +236,9 @@ var user_role_pm=userDetils.r;
       let {offset,limit} = this.state;
       offset = offset + limit;
       this.setState({offset});
-      //console.log(offset);
-
+      console.log(offset);
+      // setTimeout(  
+      //   function() {
         let users = JSON.parse(localStorage.getItem("user"));
         let idd_u = users.user_id;
 
@@ -247,7 +248,7 @@ var user_role_pm=userDetils.r;
           formDt.append('project',this.state.proj_nm);
           formDt.append('tasklist',this.state.flt_tasklist);
           formDt.append('uassign',this.state.flt_assign);
-          formDt.append('off_set',this.state.off);
+          formDt.append('off_set',this.state.offset);
           formDt.append('lmt_set',this.state.limit);
           formDt.append('task_srch',this.state.srch);
           formDt.append('role',this.state.role);
@@ -270,6 +271,7 @@ var user_role_pm=userDetils.r;
                 //console.log("error");
                 }
           })
+        // }.bind(this), 300 );
 }
 
 
@@ -360,6 +362,7 @@ var user_role_pm=userDetils.r;
       formDt.append('lmt_set',this.state.limit);
       formDt.append('task_srch',this.state.srch);
       formDt.append('role',this.state.role);
+      
         
        
         axios({
