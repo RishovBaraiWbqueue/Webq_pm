@@ -61,9 +61,55 @@ this.usserassigne=this.usserassigne.bind(this);
 
   }
 
+          taskRender() {
+            if(this.state.isChecked == true){
+               return   <select name="slt1" className="form-control" value={this.state.slt1} onChange={this.ckchange}>
+                            <option value="">-- All TO DO(s) --</option>
+                            <option value="Working">Working</option>
+                            <option value="Assigned">Assigned</option>
+                            <option value="Tested Buggy">Tested Buggy</option>
+                            <option value="Tested Wrong">Tested Wrong</option>
+                            <option value="Buggy By Employer">Buggy By Employer</option>
+                            <option value="Wrong By Employer">Wrong By Employer</option>
+                            <option value="understood">Understood</option>
+                        </select>
+          }
+          else if(this.state.isChecked == false){
+            return  <select name="slt1" className="form-control" value={this.state.slt1} onChange={this.ckchange}>
+                      <option value="">-- All TO DO(s) --</option>
+                      <option value="Done">Done</option>
+                      <option value="Opened">Opened</option>
+                      <option value="Technical Issue">Technical Issue</option>
+                      <option value="Clarify">Clarify</option>
+                      <option value="tested ok">Tested OK</option>
+                      <option value="Working">Working</option>
+                      <option value="Assigned">Assigned</option>
+                      <option value="Tested Buggy">Tested Buggy</option>
+                      <option value="Tested Wrong">Tested Wrong</option>
+                      <option value="Buggy By Employer">Buggy By Employer</option>
+                      <option value="Wrong By Employer">Wrong By Employer</option>
+                      <option value="understood">Understood</option>
+                      <option value="Completed">Completed</option>
+                      <option value="Reopened">Reopened</option>
+                      <option value="Failed">Failed</option>
+                      <option value="Canceled">Canceled</option>
+                      <option value="Approved By Employer">Approved By Employer</option>
+                      <option value="Extra Work">Extra Work</option>
+                      <option value="Pre-Assigned">Pre-Assigned</option>
+                      <option value="Time Over">Time Over</option>
+                      <option value="Confused By Employer">Confused By Employer</option>
+                      <option value="Wrong By Employer">Wrong By Employer</option>
+                      <option value="Stop Working">Stop Working</option>
+                      <option value="Extra Time Approved">Extra Time Approved</option>
+                      <option value="Awaiting">Awaiting</option>
+                      <option value="Pause">Pause</option>
+                   </select>
+          }
+        }
             // onchange text filter or search text form array
             onTextChange = (e) =>
             { 
+            
               const value = e.target.value;
               let pro_name = [];
               let {proj_nm} = this.state;
@@ -72,6 +118,7 @@ this.usserassigne=this.usserassigne.bind(this);
              
               // if(value.length > 0){
                 console.log(this.state.proj_nm);
+               
                 setTimeout(  
                   function() { 
                           let formData = new FormData();
@@ -152,7 +199,9 @@ this.usserassigne=this.usserassigne.bind(this);
                   </ul>
               )
                   }
-              else {return null;}
+              else {
+                return null;
+              }
           } 
               
               else {
@@ -194,15 +243,15 @@ var user_role_pm=userDetils.r;
 
         let formDt = new FormData();
           formDt.append('user_id',idd_u);
-                formDt.append('todo',this.state.slt1);
-                formDt.append('project',this.state.proj_nm);
-                formDt.append('tasklist',this.state.flt_tasklist);
-                formDt.append('uassign',this.state.flt_assign);
-                formDt.append('off_set',this.state.offset);
-                formDt.append('lmt_set',this.state.limit);
-                formDt.append('task_srch',this.state.srch);
-                formDt.append('role',this.state.role);
-                
+          formDt.append('todo',this.state.slt1);
+          formDt.append('project',this.state.proj_nm);
+          formDt.append('tasklist',this.state.flt_tasklist);
+          formDt.append('uassign',this.state.flt_assign);
+          formDt.append('off_set',this.state.off);
+          formDt.append('lmt_set',this.state.limit);
+          formDt.append('task_srch',this.state.srch);
+          formDt.append('role',this.state.role);
+            
 
           axios({
           method: 'post',
@@ -271,13 +320,18 @@ var user_role_pm=userDetils.r;
             let {isChecked}=this.state;
             isChecked=false;
             this.setState({isChecked});
-            //console.log(this.state.isChecked);
+            console.log(this.state.isChecked);
+            
+            
+            
           }
           else if(ev.target.getAttribute("data-id")=="false"){
              let {isChecked}=this.state;
             isChecked=true;
             this.setState({isChecked});
-            //console.log(this.state.isChecked); 
+            console.log(this.state.isChecked); 
+           
+
           }
   }
 
@@ -474,18 +528,10 @@ return (
                       <div className="filter">
                           <label>Status:<input type="checkbox" data-id={this.state.isChecked} checked={this.state.isChecked} onChange={this.ckchange}/>To Do(s)</label>
 
-                            <select name="slt1" className="form-control" value={this.state.slt1} onChange={this.ckchange}>
-                                <option value="">-- All Task(s) --</option>
-                                <option value="Done">Done</option>
-                                <option value="tested ok">Tested OK</option>
-                                <option value="Working">Working</option>
-                                <option value="Assigned">Assigned</option>
-                                <option value="Tested Buggy">Tested Buggy</option>
-                                <option value="Tested Wrong">Tested Wrong</option>
-                                <option value="Buggy By Employer">Buggy By Employer</option>
-                                <option value="Wrong By Employer">Wrong By Employer</option>
-                                <option value="understood">Understood</option>
-                            </select>
+
+                                
+                             {this.taskRender()} 
+                          
 
                         </div>
                     </div>
